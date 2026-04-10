@@ -31,6 +31,7 @@
 #include "C4TextEncoding.h"
 
 #include <format>
+#include <imgui.h>
 
 #ifdef _WIN32
 #include "res/engine_resource.h"
@@ -377,6 +378,17 @@ namespace
 
 void C4FullScreen::HandleMessage(SDL_Event &e)
 {
+	if (imGui)
+	{
+		imGui->Select();
+		ImGui_ImplSDL3_ProcessEvent(&sdl_event);
+
+		if (imGui->WantsMouse())
+		{
+			return;
+		}
+	}
+
 	switch (e.type)
 	{
 	case SDL_TEXTINPUT:
@@ -494,6 +506,14 @@ void C4FullScreen::Execute()
 	if (pMenu) pMenu->Execute();
 	// Draw
 	Game.GraphicsSystem.Execute();
+
+#ifdef USE_SDL_MAINLOOP
+	if(imGui && imGui->NewFrame())
+	{
+		ImGui::ShowDemoWindow();
+		imGui->Render();
+	}
+#endif
 }
 
 bool C4FullScreen::ViewportCheck()

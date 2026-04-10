@@ -1,0 +1,8 @@
+[submodule "src/imgui"]
+	path = src/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = master
+[submodule "src/imgui_textselect"]
+	path = src/imgui_textselect
+	url = https://github.com/RoboClonk/ImGuiTextSelect.git
+	branch = LegacyClonk

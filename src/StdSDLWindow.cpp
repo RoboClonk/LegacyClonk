@@ -62,6 +62,8 @@ bool CStdWindow::Init(CStdApp *const app, const char *const title, const C4Rect 
 	sdlWindow = SDL_CreateWindow(title, bounds.x, bounds.y, width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	ThrowIfFailed("SDL_CreateWindow", !sdlWindow);
 
+	InitImGui();
+
 	return true;
 }
 
@@ -135,4 +137,9 @@ float CStdWindow::GetInputScale()
 	SDL_GL_GetDrawableSize(sdlWindow, &drawableWidth, &drawableHeight);
 
 	return static_cast<float>(drawableWidth) / static_cast<float>(width);
+}
+
+void CStdWindow::InitImGui()
+{
+	imGui.emplace(sdlWindow);
 }

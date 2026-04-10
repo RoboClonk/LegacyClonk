@@ -253,6 +253,7 @@ endif ()
 
 if (USE_SDL_MAINLOOP)
 	append_filelist(CLONK_SOURCES EngineSdlMainloop)
+	append_filelist(CLONK_SOURCES EngineImGui)
 endif ()
 
 if (USE_X11)
@@ -316,6 +317,10 @@ add_custom_command(
 )
 
 target_sources(clonk PUBLIC ${RES_STR_TABLE_OUTPUT_CPP} ${RES_STR_TABLE_OUTPUT_H})
+
+if (USE_SDL_MAINLOOP)
+	target_include_directories(clonk PUBLIC src/imgui)
+endif ()
 
 # Add c4group target
 

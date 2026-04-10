@@ -33,6 +33,9 @@
 #include <shobjidl.h>
 #endif
 
+#include "C4ImGui.h"
+#include <optional>
+
 class CStdApp;
 #ifdef USE_X11
 // Forward declarations because xlib.h is evil
@@ -65,6 +68,9 @@ public:
 	void StorePosition();
 	void RestorePosition();
 	bool GetSize(C4Rect &rect);
+
+	void InitImGui();
+	std::optional<C4ImGui> imGui;
 
 #ifdef _WIN32
 	virtual
